@@ -87,6 +87,6 @@ class MongoBridge(object):
         afilter = {"artistID": aid}
         artist = self.__myCollection.find_one(afilter)
         if artist is not None:
-            return artist
+            return dict(artist)
         else:
             raise ArtistNotFound("Artist was not found!", 5)
