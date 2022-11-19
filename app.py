@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 from applayer.artistlist import ArtistList
 from bokeh.resources import INLINE
 from guilayer.render import render_graph
+from applayer.artistgraph import ArtistGraph
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'jerrygthesupremeleader'
@@ -38,8 +39,8 @@ def main_page():
         script = None
         div = None
         # Uncomment the next two lines to do system tests
-        # ag = ArtistGraph(artist_list, int(form.depth.data))
-        # script, div = render_graph(ag.graph)
+        ag = ArtistGraph(artist_list, int(form.depth.data))
+        script, div = render_graph(ag.graph)
 
     html = render_template('index.html', title='Home', formtitle='Artist Social Network',
                            form=form, select=artist_list, plot_script=script, debug=debug,

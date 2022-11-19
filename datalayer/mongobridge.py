@@ -1,6 +1,7 @@
 import pymongo
 from typing import List, Any
 from multipledispatch import dispatch
+from datalayer.artistnotfound import ArtistNotFound
 
 
 class MongoBridge(object):
@@ -85,4 +86,7 @@ class MongoBridge(object):
         """
         afilter = {"artistID": aid}
         artist = self.__myCollection.find_one(afilter)
-        return artist
+        if artist is not None:
+            return artist
+        else:
+            raise ArtistNotFound("Artist was not found!", 5)
